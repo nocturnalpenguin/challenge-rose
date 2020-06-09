@@ -2,8 +2,8 @@
 import CanvasBase from './CanvasBase'
 
 class Rose extends CanvasBase {
-    constructor(...props) {
-        super(...props)
+    constructor(...args) {
+        super(...args)
         this.scale = 1
         this.n = 6
         this.d = 5
