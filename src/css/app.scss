@@ -38,6 +38,8 @@ html, body {
     }
     
     #info {
+        max-width: 100%;
+
         @media(min-width: 991px) {
             margin: 0 15px;
         }
