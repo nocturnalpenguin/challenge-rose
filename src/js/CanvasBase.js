@@ -38,14 +38,20 @@ export default class CanvasBase {
     }
 
     watchPageResize() {
-        if (window.innerWidth >= 991) {
-            this.canvas.width = this.width
-            this.canvas.height = this.height
-        } else {
-            const size = Math.min(window.innerWidth, window.innerHeight) - 60
-            this.canvas.width = size
-            this.canvas.height = size
+        let padding = 30
+
+        if (window.screen.width > 576) {
+            padding = 60
         }
+        if (window.screen.width > 991) {
+            padding = 0
+        }
+
+        const size = Math.min(window.screen.width, window.screen.height, this.width) - padding
+
+        this.canvas.width = size
+        this.canvas.height = size
+
         if (this.resizeCallbacks.length > 0) {
             this.resizeCallbacks.forEach(callback => callback())
         }
