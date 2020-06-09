@@ -2,9 +2,9 @@
 import CanvasBase from './CanvasBase'
 
 class Rose extends CanvasBase {
-    constructor(props) {
-        super(props)
-        this.scale = 280
+    constructor(...props) {
+        super(...props)
+        this.scale = 1
         this.n = 6
         this.d = 5
         this.k = null
@@ -12,6 +12,8 @@ class Rose extends CanvasBase {
         this.vertices = []
         this.minAngle = 0.002
         this.colorOffset = 173
+
+        this.resizeCallbacks = [this.restartAnimation.bind(this)]
     }
 
     getVertices() {
@@ -35,6 +37,7 @@ class Rose extends CanvasBase {
     }
 
     startAnimation() {
+        this.scale = Math.floor(this.canvas.width * 0.4666)
         this.getVertices()
         
         const iterationsPerFrame = Math.floor(this.vertices.length / (this.duration * 60))
@@ -68,6 +71,12 @@ class Rose extends CanvasBase {
         })
     }
 
+    restartAnimation() {
+        this.stopFrameUpdate()
+        this.clearCanvas()
+        this.startAnimation()
+    }
+
     attachControls() {
         const numeratorInput = document.querySelector('#controls input[name="numerator"]')
         const denominatorInput = document.querySelector('#controls input[name="denominator"]')
@@ -86,10 +95,8 @@ class Rose extends CanvasBase {
     }
 
     controlListener(e, property) {
-        this.stopFrameUpdate()
-        this.clearCanvas()
         this[property] = Number(e.target.value)
-        this.startAnimation()
+        this.restartAnimation()
     }
 
     updateInputValueLabel(e) {
