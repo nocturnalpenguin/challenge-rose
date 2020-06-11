@@ -76,4 +76,14 @@ export default class CanvasBase {
     attachListeners() {
         window.addEventListener('resize', debounce(this.watchPageResize.bind(this), 160))
     }
+
+    preRenderCanvas(width, height, callback = (ctx) => {}) {
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+        canvas.width = width
+        canvas.height = height
+
+        callback(ctx)
+        return canvas
+    }
 }

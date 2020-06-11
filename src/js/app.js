@@ -59,6 +59,8 @@ class Rose extends CanvasBase {
                         const dy = Math.pow(((this.canvas.height / 2) - this.vertices[index].y) / this.ratio, 2)
                         const distanceFromCenter = (Math.sqrt(dx + dy) + this.colorOffset)
                         this.ctx.strokeStyle = `hsl(${360 - (distanceFromCenter % 361)}, 85%, 60%)`
+                    } else {
+                        this.ctx.lineTo(this.vertices[0].x, this.vertices[0].y)
                     }
                 }
 
