@@ -42,7 +42,7 @@ class Rose extends CanvasBase {
         
         const iterationsPerFrame = Math.floor(this.vertices.length / (this.duration * 60))
         
-        this.ctx.lineWidth = 2;
+        this.ctx.lineWidth = 4.5;
         
         let iteration = 1
         this.updateFrame(() => {
@@ -55,9 +55,9 @@ class Rose extends CanvasBase {
                     if (index < this.vertices.length) {
                         this.ctx.lineTo(this.vertices[index].x, this.vertices[index].y)
                         // color
-                        const dx = Math.pow(((this.canvas.width / 2) - this.vertices[index].x), 2)
-                        const dy = Math.pow(((this.canvas.height / 2) - this.vertices[index].y), 2)
-                        const distanceFromCenter = Math.sqrt(dx + dy) + this.colorOffset
+                        const dx = Math.pow(((this.canvas.width / 2) - this.vertices[index].x) / this.ratio, 2)
+                        const dy = Math.pow(((this.canvas.height / 2) - this.vertices[index].y) / this.ratio, 2)
+                        const distanceFromCenter = (Math.sqrt(dx + dy) + this.colorOffset)
                         this.ctx.strokeStyle = `hsl(${360 - (distanceFromCenter % 361)}, 85%, 60%)`
                     }
                 }
